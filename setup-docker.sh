@@ -1,5 +1,5 @@
 #!/bin/bash
-# script that runs 
+# script that runs
 # https://kubernetes.io/docs/setup/production-environment/container-runtime
 
 yum install -y vim yum-utils device-mapper-persistent-data lvm2
@@ -8,7 +8,12 @@ yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce
 # notice that only verified versions of Docker may be installed
 # verify the documentation to check if a more recent version is available
 
-yum install -y docker-ce
+#yum install -y docker-ce
+yum update -y && yum install -y \
+  containerd.io-1.2.13 \
+  docker-ce-19.03.8 \
+  docker-ce-cli-19.03.8
+
 [ ! -d /etc/docker ] && mkdir /etc/docker
 
 cat > /etc/docker/daemon.json <<EOF
@@ -27,10 +32,9 @@ EOF
 
 cat >> /etc/hosts << EOF
 {
-  192.168.4.110 control.example.com control
-  192.168.4.111 worker1.example.com worker1
-  192.168.4.112 worker2.example.com worker2
-  192.168.4.113 worker3.example.com worker3
+  192.168.20.10 control.example.com control
+  192.168.20.11 worker1.example.com worker1
+  192.168.20.12 worker2.example.com worker2
 }
 EOF
 
