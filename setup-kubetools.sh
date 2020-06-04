@@ -17,8 +17,10 @@ setenforce 0
 sed -i 's/^SELINUX=enforcing$/SELINUX=permissive/' /etc/selinux/config
 
 # disable swap (assuming that the name is /dev/centos/swap
-sed -i 's/^\/dev\/mapper\/centos-swap/#\/dev\/mapper\/centos-swap/' /etc/fstab
-swapoff /dev/mapper/centos-swap
+# sed -i 's/^\/dev\/mapper\/centos-swap/#\/dev\/mapper\/centos-swap/' /etc/fstab
+# swapoff /dev/mapper/centos-swap
+sed -i 's/^\/swapfile/#\/swapfile/p' /etc/fstab
+swapoff -a
 
 yum install -y kubelet kubeadm kubectl --disableexcludes=kubernetes
 
