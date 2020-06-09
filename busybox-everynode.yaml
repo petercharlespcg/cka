@@ -1,0 +1,18 @@
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: busybox-everynode
+  labels:
+    k8s-app: busybox-every
+spec:
+  selector:
+    matchLabels:
+      name: busybox-everynode
+  template:
+    metadata:
+      labels:
+        name: busybox-everynode
+    spec:
+      containers:
+      - name: busybox-everynode
+        image: busybox 
